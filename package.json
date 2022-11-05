@@ -2,10 +2,10 @@
   "name": "farmyard",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "debug": "concurrently \"nodemon --inspect backend/server.js\" \" npm start --prefix=frontend \""
+    "start": "node index.js",
+    "debug": "concurrently \"nodemon --inspect index.js\" \" npm start --prefix=frontend \""
   },
   "keywords": [],
   "author": "",
