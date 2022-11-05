@@ -13,9 +13,9 @@ app.use(express.urlencoded({ extended: false }), express.json());
 
 // Serve react app
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend", "build")));
+  app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
   app.get("*", (req, res, next) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "..", "frontend", "build", "index.html"));
   });
 }
 
