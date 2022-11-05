@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "debug": "concurrently \"nodemon --inspect index.js\" \" npm start --prefix=frontend \""
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "debug": "concurrently \"nodemon --inspect backend/server.js\" \" npm start --prefix=frontend \""
   },
   "keywords": [],
   "author": "",
