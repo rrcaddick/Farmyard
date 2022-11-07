@@ -47,6 +47,8 @@ class ParkCapacity {
       return state === "Success" && isEntry;
     });
 
+    await this.browser.close();
+
     return totals.reduce(
       (acc, sale) => {
         const { trxBasketItem, typedescr } = sale;
