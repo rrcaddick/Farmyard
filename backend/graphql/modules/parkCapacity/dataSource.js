@@ -2,10 +2,14 @@ const puppeteer = require("puppeteer");
 
 class ParkCapacity {
   async getCurrentCapacity(date) {
+    console.log("Entering data source");
+
     const browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
+
+    console.log("Browser created");
 
     const [page] = await browser.pages();
     await page.goto("https://ikhokha.biz:8181/reporter/login");
@@ -27,11 +31,15 @@ class ParkCapacity {
       })
       .replaceAll("/", "");
 
+    console.log("Query date", queryDate);
+
     await page.goto(`https://ikhokha.biz/reporter/app/myhistory/detailedhistory/${queryDate}0000/${queryDate}2355`);
 
     const data = await page.evaluate(() => {
       return JSON.parse(document.querySelector("body").innerText);
     });
+
+    console.log("Data", data);
 
     await browser.close();
 
