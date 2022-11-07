@@ -1,6 +1,13 @@
 {
   "configurations": [
     {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}/frontend"
+    },
+    {
       "name": "Attach Node",
       "port": 9229,
       "request": "attach",
