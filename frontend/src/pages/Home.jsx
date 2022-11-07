@@ -7,7 +7,7 @@ import { useState } from "react";
 import moment from "moment";
 
 const Home = () => {
-  const { currentCapcity, loading, error, refetch } = useGetCurrentCapcity();
+  const { currentCapcity, loading, refetch } = useGetCurrentCapcity();
   const [groupBookings, setGroupBookings] = useState(0);
   const [onlineTickets, setOnlineTickets] = useState(0);
   const maxValue = 1500 - groupBookings - onlineTickets;
