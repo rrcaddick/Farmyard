@@ -59,7 +59,7 @@ const Home = () => {
       </Box>
       {loading && <CircularProgress />}
       {!loading && (
-        <Box width="60%">
+        <Box width="60%" maxWidth="300px">
           <CircularProgressbar
             value={currentCapcity?.getCurrentCapcity?.people}
             maxValue={maxValue}
