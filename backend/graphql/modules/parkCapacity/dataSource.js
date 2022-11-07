@@ -33,6 +33,8 @@ class ParkCapacity {
       return JSON.parse(document.querySelector("body").innerText);
     });
 
+    await browser.close();
+
     const totals = data.filter((sale) => {
       let isEntry = false;
       const { state, trxBasketItem } = sale;
@@ -46,8 +48,6 @@ class ParkCapacity {
 
       return state === "Success" && isEntry;
     });
-
-    await this.browser.close();
 
     return totals.reduce(
       (acc, sale) => {
