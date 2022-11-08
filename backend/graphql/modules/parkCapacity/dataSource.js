@@ -2,52 +2,36 @@ const puppeteer = require("puppeteer");
 
 class ParkCapacity {
   async getCurrentCapacity(date) {
-    console.log("Entering data source");
-
     const browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
-    console.log("Browser created");
-
     const [page] = await browser.pages();
     await page.goto("https://ikhokha.biz:8181/reporter/login");
-
-    console.log("Login page");
 
     // Login
     await page.type(`input[name="username"]`, process.env.IKHOKHA_USER, { delay: 50 });
     await page.type(`input[name="password"]`, process.env.IKHOKHA_PASSWORD, { delay: 50 });
-
-    console.log("Login filled");
 
     await Promise.all([
       page.click(`input[name="submit"]`),
       page.waitForNavigation({ waitUntil: "networkidle2", timeout: false }),
     ]);
 
-    console.log("Logged in");
-
-    const dateObject = new Date(date);
-
-    const queryDate = dateObject
+    const queryDate = new Date(date)
       .toLocaleString("en-ZA", {
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
       })
-      .replaceAll("/", "");
-
-    console.log("Query date", queryDate);
+      .replace(/\//g, "");
 
     await page.goto(`https://ikhokha.biz/reporter/app/myhistory/detailedhistory/${queryDate}0000/${queryDate}2355`);
 
     const data = await page.evaluate(() => {
       return JSON.parse(document.querySelector("body").innerText);
     });
-
-    console.log("Data", data);
 
     await browser.close();
 
