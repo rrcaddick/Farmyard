@@ -14,16 +14,24 @@ class ParkCapacity {
     const [page] = await browser.pages();
     await page.goto("https://ikhokha.biz:8181/reporter/login");
 
+    console.log("Login page");
+
     // Login
     await page.type(`input[name="username"]`, process.env.IKHOKHA_USER, { delay: 50 });
     await page.type(`input[name="password"]`, process.env.IKHOKHA_PASSWORD, { delay: 50 });
+
+    console.log("Login filled");
 
     await Promise.all([
       page.click(`input[name="submit"]`),
       page.waitForNavigation({ waitUntil: "networkidle2", timeout: false }),
     ]);
 
-    const queryDate = new Date(date)
+    console.log("Logged in");
+
+    const dateObject = new Date(date);
+
+    const queryDate = dateObject
       .toLocaleString("en-ZA", {
         month: "2-digit",
         day: "2-digit",
