@@ -40,7 +40,7 @@ class ParkCapacity {
       const { state, trxBasketItem } = sale;
 
       for (let { itemDescription } of trxBasketItem) {
-        if (itemDescription.toLowerCase().includes("person") || itemDescription.toLowerCase().includes("discount")) {
+        if (itemDescription.toLowerCase().includes("visitor")) {
           isEntry = true;
           break;
         }
@@ -58,12 +58,10 @@ class ParkCapacity {
 
         const { people, group, totalAmount } = trxBasketItem.reduce(
           (acc, { itemDescription, nrItems, totalAmount }) => {
-            if (
-              !(itemDescription.toLowerCase().includes("person") || itemDescription.toLowerCase().includes("discount"))
-            )
-              return acc;
-            const isPublic = itemDescription.toLowerCase().includes("person");
-            const isGroup = itemDescription.toLowerCase().includes("discount");
+            if (!itemDescription.toLowerCase().includes("visitor")) return acc;
+            const isGroup =
+              itemDescription.toLowerCase().includes("group") || itemDescription.toLowerCase().includes("school");
+            const isPublic = itemDescription.toLowerCase().includes("1");
 
             return {
               people: isPublic ? acc.people + nrItems : acc.people,
