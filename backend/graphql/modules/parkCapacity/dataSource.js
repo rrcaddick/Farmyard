@@ -61,7 +61,8 @@ class ParkCapacity {
             if (!itemDescription.toLowerCase().includes("visitor")) return acc;
             const isGroup =
               itemDescription.toLowerCase().includes("group") || itemDescription.toLowerCase().includes("school");
-            const isPublic = itemDescription.toLowerCase().includes("1");
+
+            const isPublic = itemDescription.toLowerCase().includes("visitor");
 
             return {
               people: isPublic ? acc.people + nrItems : acc.people,
